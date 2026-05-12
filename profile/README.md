@@ -153,12 +153,12 @@ curl -sSfL https://automicvault.com/install.sh | sh
 
 This verifies our code-signature and team ID before installing the app to your
 Applications folder. It’s a slightly more reassuring way of just downloading
-the DMG yourself. And it is just a more verbose version of this, so just
-copy paste this if you like:
+the DMG yourself. It’s just a slightly more thorough version of the following
+which you can copy & paste into a terminal if you like:
 
 ```bash
 tmp="$(mktemp -d)" \
-  && /usr/bin/curl -sSfL 'https://automicvault.com/Automic%20Vault.dmg' -o "$tmp/av.dmg" \
+  && /usr/bin/curl -sSfL 'https://automicvault.com/av.dmg' -o "$tmp/av.dmg" \
   && /usr/sbin/spctl -a -vv --type open "$tmp/av.dmg" \
   && /usr/bin/hdiutil attach "$tmp/av.dmg" -mountpoint "$tmp/mnt" -nobrowse -quiet \
   && app="$(find "$tmp/mnt" -maxdepth 1 -name '*.app' -print -quit)" \
