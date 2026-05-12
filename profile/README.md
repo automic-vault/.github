@@ -197,4 +197,3 @@ Automic Vault is an attempt to build a safer foundation for the next generation 
     Built by <a href="https://mxcl.dev">mxcl</a>, creator of Homebrew.
   </sub>
 </p>
-```
