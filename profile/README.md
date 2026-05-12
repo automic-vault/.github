@@ -143,27 +143,30 @@ without turning your machine into archaeological sediment.
 ## Install
 
 Download the latest release from the
-[GitHub releases page](https://github.com/automicvault/automic-vault/releases/latest)
-or run this command in your terminal:
+[GitHub releases page](https://github.com/automicvault/automic-vault/releases/latest).
 
-```bash
-tmp="$(mktemp -d)" \
-  && dmg="$tmp/AutomicVault.dmg" \
-  && mount="$tmp/mnt" \
-  && /usr/bin/curl -sSfL https://automicvault.com/AutomicVault.dmg -o "$dmg" \
-  && /usr/sbin/spctl -a -vv --type open "$dmg" \
-  && /usr/bin/hdiutil attach "$dmg" -mountpoint "$mount" -nobrowse -quiet \
-  && app="$(find "$mount" -maxdepth 1 -name '*.app' -print -quit)" \
-  && /usr/bin/codesign -dv --verbose=4 "$app" 2>&1 \
-    | /usr/bin/grep -q '^TeamIdentifier=ZU76A67LGU$' \
-  && /usr/bin/sudo /bin/cp -R "$app" /Applications/ \
-  && /usr/bin/hdiutil detach "$mount" -quiet \
-  && /bin/rm -rf "$tmp"
+Or we provide a cURL one-liner:
+
+```sh
+curl -sSfL https://automicvault.com/install.sh | sh
 ```
 
 This verifies our code-signature and team ID before installing the app to your
 Applications folder. It’s a slightly more reassuring way of just downloading
-the DMG yourself.
+the DMG yourself. And it is just a more verbose version of this, so just
+copy paste this if you like:
+
+```bash
+tmp="$(mktemp -d)" \
+  && /usr/bin/curl -sSfL 'https://automicvault.com/Automic%20Vault.dmg' -o "$tmp/av.dmg" \
+  && /usr/sbin/spctl -a -vv --type open "$tmp/av.dmg" \
+  && /usr/bin/hdiutil attach "$tmp/av.dmg" -mountpoint "$tmp/mnt" -nobrowse -quiet \
+  && app="$(find "$tmp/mnt" -maxdepth 1 -name '*.app' -print -quit)" \
+  && /usr/bin/codesign -dv --verbose=4 "$app" 2>&1 | /usr/bin/grep -q '^TeamIdentifier=ZU76A67LGU$' \
+  && /usr/bin/ditto "$app" "/Applications/$(basename "$app")"
+  && /usr/bin/hdiutil detach "$tmp/mnt" -quiet \
+  && /bin/rm -rf "$tmp"
+```
 
 ---
 
