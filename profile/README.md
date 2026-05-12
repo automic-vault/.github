@@ -13,9 +13,9 @@
 <p align="center">
   <a href="https://automicvault.com">Website</a>
   ·
-  <a href="https://automicvault.com/docs">Documentation</a>
+  <a href="https://automicvault.com/docs/">Documentation</a>
   ·
-  <a href="https://github.com/automicvault/automic-vault">Main Repo</a>
+  <a href="https://github.com/automic-vault/automic-vault">Main Repo</a>
 </p>
 
 ---
@@ -143,7 +143,7 @@ without turning your machine into archaeological sediment.
 ## Install
 
 Download the latest release from the
-[GitHub releases page](https://github.com/automicvault/automic-vault/releases/latest).
+[GitHub releases page](https://github.com/automic-vault/automic-vault/releases/latest).
 
 Or we provide a cURL one-liner:
 
@@ -172,11 +172,11 @@ tmp="$(mktemp -d)" \
 
 ## Core Projects
 
-| Repository                                                       | Purpose                      |
-| ---------------------------------------------------------------- | ---------------------------- |
-| [`automic-vault`](https://github.com/automicvault/automic-vault) | Main macOS application       |
-| [`av`](https://github.com/automicvault/av)                       | CLI and execution tooling    |
-| [`isotopes`](https://github.com/automicvault/isotopes)           | Secure patched tool wrappers |
+| Repository                                                        | Purpose                      |
+| ----------------------------------------------------------------- | ---------------------------- |
+| [`automic-vault`](https://github.com/automic-vault/automic-vault) | Main macOS application       |
+| [`av`](https://github.com/automic-vault/automic-vault)            | CLI and execution tooling    |
+| [`isotopes`](https://github.com/automic-vault/isotopes)           | Secure patched tool wrappers |
 
 ---
 
