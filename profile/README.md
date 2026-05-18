@@ -5,7 +5,7 @@
 Package manager, secrets manager, and execution control plane for autonomous
 agents on macOS.
 
-[Website][website] | [Docs][docs] | [Main repo][repo] | [Latest release][release]
+[Website][website] | [Docs][docs] | [Main Repo][repo] | [Latest Release][release]
 
 > [!IMPORTANT]
 > Automic Vault is not affiliated with any cryptocurrency or token.
@@ -13,19 +13,20 @@ agents on macOS.
 ## Install
 
 ```sh
-$ curl -fsSL https://automicvault.com/install.sh | sh
+$ curl -fsSL https://automicvault.com/install.sh | sh -x
+# ^^ downloads the DMG, lets Gatekeeper inspect it, checks our Team ID, then
+#    copies the app into /Applications
+
 + /usr/bin/curl -sSfL https://automicvault.com/AutomicVault.dmg -o "$tmp/av.dmg"
 + /usr/sbin/spctl -a -vv --type open "$tmp/av.dmg"
 + /usr/bin/codesign -dv --verbose=4 "$app"
 + /usr/bin/ditto "$app" "/Applications/$(basename "$app")"
-# ^^ downloads the DMG, lets Gatekeeper inspect it, checks our Team ID, then
-#    copies the app into /Applications
 ```
 
-If `curl | sh` gives you hives, fair. Open the script first:
+If `curl | sh` gives you hives, fair. Read it first:
 
 ```sh
-$ curl -fsSL https://automicvault.com/install.sh
+curl -fsSL https://automicvault.com/install.sh | code -
 ```
 
 Or download the DMG from [GitHub releases][release].
