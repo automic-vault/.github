@@ -1,199 +1,103 @@
-![Automic Vault](../infographic.webp)
+![Automic Vault](../profile.webp)
 
-<h1 align="center">AUTOMIC VAULT</h1>
+# Automic Vault
 
-<p align="center">
-  <strong>Secure package management and approval-gated tooling for AI agents and developers on macOS.</strong>
-</p>
+Package manager, secrets manager, and execution control plane for autonomous
+agents on macOS.
 
-<p align="center">
-  Built for the era of Codex, Claude Code, Goose, and autonomous developer tooling.
-</p>
+[Website][website] | [Docs][docs] | [Main repo][repo] | [Latest release][release]
 
-<p align="center">
-  <a href="https://automicvault.com">Website</a>
-  ·
-  <a href="https://automicvault.com/docs/">Documentation</a>
-  ·
-  <a href="https://github.com/automic-vault/automic-vault">Main Repo</a>
-</p>
-
----
-
-## What Is Automic Vault?
-
-Automic Vault is a secure package manager and execution environment designed for AI-assisted software development.
-
-Traditional developer tooling assumes:
-
-- the human is always typing
-- secrets in plaintext are acceptable
-- binaries in your PATH are trustworthy forever
-- tools can freely mutate themselves
-
-AI agents break those assumptions.
-
-Automic Vault rebuilds the developer toolchain around that reality.
-
----
-
-## Features
-
-| Feature | Description |
-|---|---|
-| 🔒 Secure Secret Handling | Patched tools avoid dropping secrets into world-readable files and environment variables |
-| 🧊 Immutable Installs | Packages install into controlled locations resistant to mutation |
-| 🤖 Agent Ready | Designed for Codex, Claude Code, Goose, and autonomous tooling |
-| 🛑 Approval Gates | High-risk operations can require explicit human approval |
-| 🖥️ Native macOS App | Fast package management GUI for modern developer workflows |
-
----
-
-## AI-Agent Safe Tooling
-
-Prevent autonomous agents from silently:
-
-- modifying critical tooling
-- replacing binaries in your PATH
-- exfiltrating credentials
-- executing destructive commands
-- mutating long-lived developer environments
-
-Automic Vault introduces approval-gated execution and immutable tooling assumptions for agentic workflows.
-
----
-
-## Secure Secret Handling
-
-Patched versions of tools such as:
-
-- `gh`
-- `aws`
-- `npm`
-- `git`
-
-avoid common plaintext secret storage patterns.
-
-The goal is simple:
-
-> agents should not inherit unrestricted access to your machine just because a token exists somewhere in `$HOME`.
-
----
-
-## Immutable Package Installs
-
-Packages are installed into controlled system locations such as:
-
-```text
-/opt
-/usr/local/bin
-````
-
-This reduces the ability for malware, compromised scripts, or autonomous agents to silently replace tooling after installation.
-
----
-
-## Approval Gates
-
-Potentially dangerous operations can require explicit human approval before execution.
-
-Examples include:
-
-* destructive filesystem operations
-* remote infrastructure changes
-* credential access
-* irreversible commands
-* large blast-radius actions
-
-```text
-Agent ──▶ Approval Gate ──▶ Tool Wrapper ──▶ Immutable Binary
-                     │
-                     └──▶ Human Approval
-```
-
----
-
-## Native macOS Package Manager
-
-Automic Vault also ships with a modern native package manager app for macOS.
-
-Install and manage:
-
-* CLI tools
-* AI coding agents
-* developer runtimes
-* Unix utilities
-* secure tool wrappers
-* curated tooling packs
-
-without turning your machine into archaeological sediment.
-
----
-
-## Who Is This For?
-
-* Developers using AI coding agents
-* Security-conscious engineers
-* Teams experimenting with autonomous tooling
-* macOS power users
-* Anyone tired of secrets leaking into dotfiles
-
----
+> [!IMPORTANT]
+> Automic Vault is not affiliated with any cryptocurrency or token.
 
 ## Install
 
-Download the latest release from the
-[GitHub releases page](https://github.com/automic-vault/automic-vault/releases/latest).
+```sh
+$ curl -fsSL https://automicvault.com/install.sh | sh
++ /usr/bin/curl -sSfL https://automicvault.com/AutomicVault.dmg -o "$tmp/av.dmg"
++ /usr/sbin/spctl -a -vv --type open "$tmp/av.dmg"
++ /usr/bin/codesign -dv --verbose=4 "$app"
++ /usr/bin/ditto "$app" "/Applications/$(basename "$app")"
+# ^^ downloads the DMG, lets Gatekeeper inspect it, checks our Team ID, then
+#    copies the app into /Applications
+```
 
-Or we provide a cURL one-liner:
+If `curl | sh` gives you hives, fair. Open the script first:
 
 ```sh
-curl -sSfL https://automicvault.com/install.sh | sh
+$ curl -fsSL https://automicvault.com/install.sh
 ```
 
-This verifies our code-signature and team ID before installing the app to your
-Applications folder. It’s a slightly more reassuring way of just downloading
-the DMG yourself. It’s just a slightly more thorough version of the following
-which you can copy & paste into a terminal if you like:
-
-```bash
-tmp="$(mktemp -d)" \
-  && /usr/bin/curl -sSfL 'https://automicvault.com/av.dmg' -o "$tmp/av.dmg" \
-  && /usr/sbin/spctl -a -vv --type open "$tmp/av.dmg" \
-  && /usr/bin/hdiutil attach "$tmp/av.dmg" -mountpoint "$tmp/mnt" -nobrowse -quiet \
-  && app="$(find "$tmp/mnt" -maxdepth 1 -name '*.app' -print -quit)" \
-  && /usr/bin/codesign -dv --verbose=4 "$app" 2>&1 | /usr/bin/grep -q '^TeamIdentifier=ZU76A67LGU$' \
-  && /usr/bin/ditto "$app" "/Applications/$(basename "$app")"
-  && /usr/bin/hdiutil detach "$tmp/mnt" -quiet \
-  && /bin/rm -rf "$tmp"
-```
-
----
-
-## Core Projects
-
-| Repository                                                        | Purpose                      |
-| ----------------------------------------------------------------- | ---------------------------- |
-| [`automic-vault`](https://github.com/automic-vault/automic-vault) | Main macOS application       |
-| [`av`](https://github.com/automic-vault/automic-vault)            | CLI and execution tooling    |
-| [`isotopes`](https://github.com/automic-vault/isotopes)           | Secure patched tool wrappers |
-
----
+Or download the DMG from [GitHub releases][release].
 
 ## Why This Exists
 
-The software ecosystem was built around humans manually operating terminals.
+Developer machines are filling up with autonomous agents that can read files,
+run tools, and use credentials intended for a human sitting at the keyboard.
 
-Now we are giving terminals to autonomous systems.
+Most agent security controls live inside the agent. Automic Vault puts a
+boundary underneath it: the packages, secrets, and commands the agent tries to
+use.
 
-That changes the threat model completely.
+Use it when you need:
 
-Automic Vault is an attempt to build a safer foundation for the next generation of developer tooling.
+- installed tools that are harder for an agent or script to silently mutate
+- secrets kept out of plaintext files, dotfiles, and model-readable context
+- approval gates for high-risk operations
+- local protection for credentials used by GitHub CLI, AWS CLI, MCP servers,
+  package managers, and automation tools
 
----
+> [!NOTE]
+> Automic Vault is the local runtime layer. It is not trying to replace every
+> enterprise secrets platform, MDM product, or security policy your company has
+> already spent six quarters arguing about.
 
-<p align="center">
-  <sub>
-    Built by <a href="https://mxcl.dev">mxcl</a>, creator of Homebrew.
-  </sub>
-</p>
+## What We Ship
+
+| Project | What it is |
+| --- | --- |
+| [`automic-vault`][repo] | macOS app, CLI, package manager, secrets manager, and approval gate system |
+| [`radioisotopes`][radioisotopes] | manifests for patched and agent-aware tool wrappers |
+| [`www.automicvault.com`][website] | docs, install flow, and security notes |
+
+## The Shape of It
+
+```text
+agent
+  |
+  v
+approval gate  ->  human says yes/no
+  |
+  v
+tool wrapper
+  |
+  v
+controlled package + secret access
+```
+
+The goal is not to make agents harmless. No. The goal is to stop every local
+agent session from automatically inheriting the full authority of your shell,
+your `$HOME`, and every credential a CLI has ever stashed away.
+
+## Platform
+
+Automic Vault is macOS-first today.
+
+> [!NOTE]
+> The main project has public milestones for Linux and Windows support. Until
+> those land, assume this is for macOS developers and agent workflows.
+
+## Start Here
+
+- [Read the main README][repo] if you want the product model.
+- [Open the docs][docs] if you want to configure it.
+- [Install the latest release][release] if you want to try it.
+
+Built by [mxcl][mxcl], creator of Homebrew.
+
+[docs]: https://automicvault.com/docs/
+[mxcl]: https://mxcl.dev
+[radioisotopes]: https://github.com/automic-vault/radioisotopes
+[release]: https://github.com/automic-vault/automic-vault/releases/latest
+[repo]: https://github.com/automic-vault/automic-vault
+[website]: https://automicvault.com
