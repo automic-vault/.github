@@ -17,7 +17,7 @@ $ curl -fsSL https://automicvault.com/install.sh | sh -x
 # ^^ downloads the DMG, lets Gatekeeper inspect it, checks our Team ID, then
 #    copies the app into /Applications
 
-+ /usr/bin/curl -sSfL https://automicvault.com/AutomicVault.dmg -o "$tmp/av.dmg"
++ /usr/bin/curl -sSfL https://automicvault.com/av.dmg -o "$tmp/av.dmg"
 + /usr/sbin/spctl -a -vv --type open "$tmp/av.dmg"
 + /usr/bin/codesign -dv --verbose=4 "$app"
 + /usr/bin/ditto "$app" "/Applications/$(basename "$app")"
