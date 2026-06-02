@@ -5,5 +5,3 @@ without giving them every secret on the machine.
 
 Packages, secrets, and risky commands go through a boundary the agent does not
 own.
-
-Main repo: https://github.com/automic-vault/automic-vault
