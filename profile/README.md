@@ -1,7 +1,7 @@
 ![Automic Vault](../profile.webp)
 
-Automic Vault is a macOS app and CLI for giving AI coding agents local tools
-without giving them every secret on the machine.
+> Secure the tool you `brew install`.
 
-Packages, secrets, and risky commands go through a boundary the agent does not
-own.
+````sh
+curl -fsSL https://automicvault.com/install.sh | sh
+```
