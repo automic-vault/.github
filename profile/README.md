@@ -1,7 +1,7 @@
 ![Automic Vault](../profile.webp)
 
-> Secure the tool you `brew install`.
+> Secure the tools you `brew install`.
 
-````sh
+```sh
 curl -fsSL https://automicvault.com/install.sh | sh
 ```
