@@ -1,4 +1,4 @@
-![Automic Vault](../assets/preview.png)
+![Automic Vault](./index.webp)
 
 ```sh
 curl -fsSL https://automicvault.com/install.sh | sh && av open
